@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap");
+
+/* DARK BACKGROUND - Cryptocurrency Style */
+body {
+  background: white !important;
+  color: #ffd700; /* Gold text color */
+  font-family: "Orbitron", sans-serif;
+}
+
+/* Main Content Container - Glassmorphism */
+.main,
+.block-container {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); /* Gold shadow */
+}
+
+/* Headers */
+h1 {
+  color: #ffd700 !important; /* Gold text color */
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  font-family: "Orbitron", sans-serif !important;
+  text-align: center !important;
+  animation: neon-glow 1.5s infinite alternate;
+}
+h2 {
+  color: #ffd700 !important; /* Gold text color */
+  font-weight: 600 !important;
+  font-family: "Orbitron", sans-serif !important;
+}
+h3 {
+  color: #ffd700 !important; /* Gold text color */
+  font-weight: 400 !important;
+  font-family: "Orbitron", sans-serif !important;
+}
+h4 {
+  color: #c0c0c0 !important; /* Silver text color */
+  font-weight: 200;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: neon-glow 1.5s infinite alternate;
+}
+
+/* Buttons - Neon Glow */
+.stButton button {
+  background: linear-gradient(90deg, #ffd700, #c0c0c0); /* Gold and silver */
+  color: #000000; /* Black text color */
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 0 10px #ffd700, 0 0 20px #c0c0c0; /* Neon glow effect */
+  font-family: "Orbitron", sans-serif !important;
+}
+
+.stButton button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ffd700, 0 0 30px #c0c0c0; /* Enhanced neon glow on hover */
+}
+
+/* Input Fields - Modern Look */
+.stTextInput input {
+  background: white;
+  color: black; /* Gold text color */
+  font-family: "Orbitron";
+  border: 2px solid #c0c0c0;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/* Divider Line */
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #ffd700, #c0c0c0);
+  margin: 15px 0;
+}
+
+/* Animated Glow */
+@keyframes neon-glow {
+  0% {
+    text-shadow: 0 0 5px #ffd700;
+  }
+  50% {
+    text-shadow: 0 0 20px #ffd700;
+  }
+  100% {
+    text-shadow: 0 0 5px #ffd700;
+  }
+}
+h1,
+h2 {
+  animation: neon-glow 1.5s infinite alternate;
+}
