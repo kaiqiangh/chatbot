@@ -1,14 +1,22 @@
 import streamlit as st
 from datetime import datetime
-import time
-
 from src.crypto_ai import CryptoAI
 from src.binance_api import BinanceAPI
 from src.technical_indicators import TechnicalIndicators
+from src.gmgn import GMGNAPI
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 # --- Page Config ---
 st.set_page_config(
     page_title="Crypto AI Agent", layout="wide", initial_sidebar_state="expanded"
+)
+
+# Initialize CryptoAI
+crypto_ai = CryptoAI(
+    api_key=os.getenv("LLM_API_KEY"),
+    model=os.getenv("LLM_MODEL"),
 )
 
 
@@ -152,8 +160,16 @@ def display_instructions():
 
 
 def solana_meme_page():
-    st.title("Solana Meme")
-    st.write("This is the Solana Meme page content.")
+    st.title("Solana Meme Analysis")
+    analyze_button = st.button("Start", type="primary")
+    if analyze_button:
+        data = GMGNAPI.get_data()
+
+        with st.spinner(f"Analysing Solana Meme Tokens..."):
+            meme_report = crypto_ai.generate_solana_meme(data)
+            st.markdown(meme_report)
+            # Add timestamp
+            st.caption(f"Analysis time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
 
 def binance_market_analysis():
@@ -205,12 +221,6 @@ def binance_market_analysis():
                         if current_price < 0.1
                         else f"${current_price:,.2f}"
                     ),
-                )
-
-                # Initialize CryptoAI
-                crypto_ai = CryptoAI(
-                    api_key="sk-643fbf4918914ba687f4cd12f2004f50",
-                    model="deepseek-chat",
                 )
 
                 # Generate trading plan
