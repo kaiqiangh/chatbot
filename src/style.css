@@ -1,99 +1,177 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap");
 
-/* DARK BACKGROUND - Cryptocurrency Style */
+/* Base styles */
 body {
   background: white !important;
-  color: #ffd700; /* Gold text color */
+  color: #ffd700;
   font-family: "Orbitron", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* Main Content Container - Glassmorphism */
+/* Container styles */
 .main,
 .block-container {
   background: white;
   border-radius: 10px;
   padding: 1.5rem;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); /* Gold shadow */
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  margin: 1rem auto;
+  max-width: 1200px;
 }
 
-/* Headers */
+/* Typography */
 h1 {
-  color: #ffd700 !important; /* Gold text color */
+  color: #ffd700 !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
   font-family: "Orbitron", sans-serif !important;
   text-align: center !important;
   animation: neon-glow 1.5s infinite alternate;
+  margin-bottom: 1.5rem;
 }
+
 h2 {
-  color: #ffd700 !important; /* Gold text color */
+  color: #ffd700 !important;
   font-weight: 600 !important;
   font-family: "Orbitron", sans-serif !important;
+  margin-bottom: 1rem;
 }
+
 h3 {
-  color: #ffd700 !important; /* Gold text color */
+  color: #ffd700 !important;
   font-weight: 400 !important;
   font-family: "Orbitron", sans-serif !important;
+  margin-bottom: 1rem;
 }
+
 h4 {
-  color: #c0c0c0 !important; /* Silver text color */
+  color: #c0c0c0 !important;
   font-weight: 200;
   text-transform: uppercase;
   letter-spacing: 1px;
   animation: neon-glow 1.5s infinite alternate;
+  margin-bottom: 1rem;
 }
 
-/* Buttons - Neon Glow */
+/* Button styles */
 .stButton button {
-  background: linear-gradient(90deg, #ffd700, #c0c0c0); /* Gold and silver */
-  color: #000000; /* Black text color */
-  font-weight: 700;
+  font-family: "Orbitron", sans-serif !important;
+  font-size: 20px !important;
+  background: linear-gradient(90deg, #ffd700, #c0c0c0);
+  color: #000000;
+  font-weight: 800;
   border: none;
   border-radius: 10px;
   padding: 10px 20px;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
-  box-shadow: 0 0 10px #ffd700, 0 0 20px #c0c0c0; /* Neon glow effect */
-  font-family: "Orbitron", sans-serif !important;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 10px #ffd700, 0 0 20px #c0c0c0;
+  display: inline-block;
+  text-align: center;
+  min-width: 150px;
 }
 
 .stButton button:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 15px #ffd700, 0 0 30px #c0c0c0; /* Enhanced neon glow on hover */
+  box-shadow: 0 0 15px #ffd700, 0 0 30px #c0c0c0;
 }
 
-/* Input Fields - Modern Look */
+.stButton button:active {
+  transform: scale(0.98);
+}
+
+/* Select box styles */
+.stSelectbox div {
+  font-family: "Orbitron", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: black !important;
+  border-radius: 8px;
+}
+
+/* Input field styles */
 .stTextInput input {
   background: white;
-  color: black; /* Gold text color */
-  font-family: "Orbitron";
+  color: black;
+  font-family: "Orbitron", sans-serif;
   border: 2px solid #c0c0c0;
   border-radius: 8px;
   padding: 10px;
+  width: 100%;
+  transition: border-color 0.3s ease;
 }
 
-/* Divider Line */
+.stTextInput input:focus {
+  border-color: #ffd700;
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+/* Divider styles */
 hr {
   border: 0;
   height: 1px;
   background: linear-gradient(90deg, #ffd700, #c0c0c0);
   margin: 15px 0;
+  clear: both;
 }
 
-/* Animated Glow */
+/* Animation */
 @keyframes neon-glow {
   0% {
     text-shadow: 0 0 5px #ffd700;
   }
   50% {
-    text-shadow: 0 0 20px #ffd700;
+    text-shadow: 0 0 20px #ffd700, 0 0 30px #ffd700;
   }
   100% {
     text-shadow: 0 0 5px #ffd700;
   }
 }
+
+/* Apply animations */
 h1,
 h2 {
   animation: neon-glow 1.5s infinite alternate;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .main,
+  .block-container {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+
+  .stButton button {
+    font-size: 16px !important;
+    padding: 8px 16px;
+    min-width: 120px;
+  }
+
+  h1 {
+    font-size: 24px !important;
+  }
+
+  h2 {
+    font-size: 20px !important;
+  }
+
+  h3 {
+    font-size: 18px !important;
+  }
+
+  h4 {
+    font-size: 16px !important;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
