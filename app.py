@@ -48,10 +48,12 @@ def meme_trending_page():
     if analyze_button:
         data = gmgn_client.get_data()
 
-        with st.spinner(f"Analysing Trending Tokens on {chain.upper()}..."):
+        with st.spinner(
+            f"Analysing Trending Meme Tokens on {chain.upper()} for {timeframe} timeframe..."
+        ):
             meme_report = crypto_ai.generate_meme_report(data, chain, timeframe)
             st.write(meme_report, unsafe_allow_html=True)
-            st.caption(f"Analysis time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            st.caption(f"Update Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
 
 def binance_market_analysis():
@@ -68,6 +70,7 @@ def binance_market_analysis():
     st.markdown(instructions_md)
 
     col1, col2 = st.columns([2, 1])
+
     with col1:
         symbol = st.text_input(
             "Enter a Symbol (e.g., BTC, ETH, SOL)", value="BTC"
@@ -94,7 +97,7 @@ def binance_market_analysis():
                     df = BinanceAPI.get_klines_data(symbol, info["interval"])
                     if df is not None:
                         df = TechnicalIndicators.calculate_indicators(df)
-                        analysis = TechnicalIndicators.analyze_trend(df)
+                        analysis = TechnicalIndicators.analyse_trend(df)
                         all_timeframe_analysis[info["name"]] = analysis
                 # Display current price
                 current_price = all_timeframe_analysis["daily"]["current_price"]
@@ -161,7 +164,7 @@ def binance_market_analysis():
 
                 # Add timestamp
                 st.caption(
-                    f"Analysis time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+                    f"Update Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
                 )
         else:
             st.error(

@@ -16,7 +16,7 @@ class GMGNAPI:
     def get_headers():
         return {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-            "Cookie": "cf_clearance=bMAXOyw0ruZW_fhLSdRsSYOhw_Zw0bM89U.qTbTK6M8-1737109556-1.2.1.1-5onV7V_Or1hkq8AhGCdVtfgr35PHSnQGeujhWOmw5i8RI54uqGPU4u7dImuTNg1Yb8fD2z2aEpT1ixToJ4uzhKV7IaYWHCmedYIA2v.vwVrKkLOCUws5yNu1LG.Xh6RF1ZvG3COwIgWxPT4qJpKbWTV57zkY9CjwxT7Ql5TzkfV0Uz5MXuoIusnW5m98_aS3BjpTh6HfpYM4Djm06eMpSiq6zSNx.Mu4ywzoLDNpV5JaEha.pcTLTFpefbEbWVXyvjtvsJRkkX9b6FXExu6pbGMeJoZpJjmYFRvZr4eXL5FyDidDXaDD6kBnb_TD2UUMsIZE24RJoLlxwC0GyotYYQ;",
+            "Cookie": "cf_clearance=D4GNxcYfuX2M1oJx30pCtoRJPJ78t7zlriO4z2w_CgY-1737131518-1.2.1.1-wiQj_F4Yq4cvo9WL0MAIa4DHycxZgygCYZBjwkD4orVwmIY9EZW4Hr4jwwOMSyS6M5c_CyzrtqCbvvle2CCZqV5PyU0vg.uULIu5pp2fjdLQy_WUhCMX2Q6oqJ8yfw4MuFl3m0Cya7yFMjNDMTLpAFxPtRMaCgEHD5_m5QhmCBbLrgtZEtpqUegUSCh4J3.N_hn12TxumBvG0e1QddhBvGSqK.SpBLD_wb_V9FRRd7c7rhyfAXm5CyoOlb0EFbiPzwUNvOCck3wAGSiJbSutS24mGoh5VBBJ1XkQPoMwmyBAt5fj._5PxyMUiGrOX5wqBr9r_gvBKf.4W7FE2BgnhQ;",
         }
 
     def get_data(self):
