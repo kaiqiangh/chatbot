@@ -79,37 +79,36 @@ class CryptoAI:
         """
         return self.generate_content(prompt)
 
+    def generate_meme_report(self, meme_data, chain, timeframe):
+        prompt = f"""
+                As a professional meme trending token analyst, please provide a detailed market report based on the following data:
 
-def generate_solana_meme(self, meme_data):
-    prompt = f"""
-            As a professional Solana meme token analyst, please provide a detailed market report based on the following data:
+                The data of trending meme tokens on the {chain} chain under the {timeframe} timeframe:
+                {meme_data}
 
-            Solana meme tokens data:
-            {meme_data}
+                Please provide the following analysis (in markdown format) with well-structured analysis of the token's performance and potential future trends:
 
-            Please provide the following analysis (in markdown format):
+                ## Market Overview
+                - considering key metrics such as price change percentage, trading volume, liquidity, and market capitalization.
+                - Evaluate the hot level and its relevance to market momentum.
+                - Discuss the buy/sell ratio and what it suggests about market sentiment.
+                - Analyze the holder count and distribution, focusing on top 10 holders and their influence.
 
-            ## Market Overview
-            - considering key metrics such as price change percentage, trading volume, liquidity, and market capitalization.
-            - Evaluate the hot level and its relevance to market momentum.
-            - Discuss the buy/sell ratio and what it suggests about market sentiment.
-            - Analyze the holder count and distribution, focusing on top 10 holders and their influence.
+                ## Trend Analysis
+                - Analyze trading activity, including number of swaps and liquidity trends based on multi-timeframe price change data if provided.
+                - Assess the impact of whale activity, particularly in relation to bluechip owners and smart degen traders.
+                - Consider any significant social sentiment signals, such as the token’s Twitter engagement and Telegram activity.
 
-            ## Trend Analysis
-            - Analyze trading activity, including number of swaps and liquidity trends.
-            - Assess the impact of whale activity, particularly in relation to bluechip owners and smart degen traders.
-            - Consider any significant social sentiment signals, such as the token’s Twitter engagement and Telegram activity.
+                ## Risk Assessment
+                - Evaluate the token’s contract security, including the impact of renounced minting and freeze account status.
+                - Assess potential market manipulation risks, including wash trading and concentration of ownership.
+                - Identify any early warning signs that could indicate liquidity risks or developer interventions.
 
-            ## Risk Assessment
-            - Evaluate the token’s contract security, including the impact of renounced minting and freeze account status.
-            - Assess potential market manipulation risks, including wash trading and concentration of ownership.
-            - Identify any early warning signs that could indicate liquidity risks or developer interventions.
+                ## Operational Suggestions
+                - Provide strategic recommendations for traders based on current market conditions.
+                - Offer guidance for long-term holders, considering factors like liquidity stability and community engagement.
+                - Suggest potential catalysts for future price movements, including marketing efforts, exchange listings, or social media campaigns.
 
-            ## Operational Suggestions
-            - Provide strategic recommendations for traders based on current market conditions.
-            - Offer guidance for long-term holders, considering factors like liquidity stability and community engagement.
-            - Suggest potential catalysts for future price movements, including marketing efforts, exchange listings, or social media campaigns.
-
-            Please ensure the analysis is professional, data-driven, and comprehensive, highlighting any potential opportunities or risks.
-        """
-    return self.generate_content(prompt)
+                Please ensure the analysis is professional, data-driven, and comprehensive, highlighting any potential opportunities or risks.
+            """
+        return self.generate_content(prompt)

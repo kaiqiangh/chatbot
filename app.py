@@ -22,165 +22,52 @@ crypto_ai = CryptoAI(
 
 # --- Custom CSS & Markdown ---
 def load_custom_css():
-    st.markdown(
-        """
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&display=swap" rel="stylesheet">
-    
-    <style>
-    /* LIGHTER BACKGROUND - Neon Gradient */
-    body {
-        background: linear-gradient(135deg, #1a1aff, #00ffff, #ff66ff); /* Neon blue & cyan gradient */
-        color: #222222; /* Dark gray for readability */
-        font-family: 'Orbitron';
-    }
-
-    /* Main Content Container - Glassmorphism */
-    .main, .block-container {
-        background: rgba(255, 255, 255, 0.8); /* Light frosted glass effect */
-        backdrop-filter: blur(10px);
-        border-radius: 10px;
-        padding: 1.5rem;
-        box-shadow: 0 0 15px rgba(0, 0, 255, 0.3);
-    }
-
-    /* Headers */
-    h1, h2, h3, h4 {
-        color: #222222; /* Darker text for contrast */
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    /* Buttons - Neon Glow */
-    .stButton button {
-        background: linear-gradient(90deg, #ff00ff, #00ffff);
-        color: #ffffff;
-        font-weight: 700;
-        border: none;
-        border-radius: 10px;
-        padding: 10px 20px;
-        cursor: pointer;
-        transition: 0.3s ease-in-out;
-        box-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
-    }
-    .stButton button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 15px #ff00ff, 0 0 30px #00ffff;
-    }
-
-    /* Input Fields - Modern Look */
-    .stTextInput input {
-        background-color: rgba(255, 255, 255, 0.8);
-        color: #222222;
-        font-family: 'Orbitron';
-        border: 2px solid #00ffff;
-        border-radius: 8px;
-        padding: 10px;
-    }
-
-    /* Sidebar - Glass Panel */
-    .css-1d391kg {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(8px);
-        color: #222222;
-        border-radius: 10px;
-        padding: 10px;
-        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-    }
-    
-    /* Sidebar Headers */
-    .css-1d391kg .css-1cpxqw2 {
-        color: #ff00ff;
-        font-weight: bold;
-    }
-    .css-1d391kg .css-1cpxqw2:hover {
-        color: #00ffff;
-    }
-
-    /* Sidebar Notes */
-    .css-17lntkn {
-        color: #444444;
-        font-size: 14px;
-        font-style: italic;
-    }
-
-    /* Divider Line */
-    hr {
-        border: 0;
-        height: 1px;
-        background: linear-gradient(90deg, #ff00ff, #00ffff);
-        margin: 15px 0;
-    }
-
-    /* Animated Glow */
-    @keyframes neon-glow {
-        0% { text-shadow: 0 0 5px #ff00ff; }
-        50% { text-shadow: 0 0 20px #ff00ff; }
-        100% { text-shadow: 0 0 5px #ff00ff; }
-    }
-    h1, h2 {
-        animation: neon-glow 1.5s infinite alternate;
-    }
-
-    </style>
-    """,
-        unsafe_allow_html=True,
-    )
+    with open("src/style.css") as f:
+        css = f.read()
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
 
 # Inject custom CSS
 load_custom_css()
 
-st.markdown(
-    "<h1 style='font-family: Orbitron, sans-serif; text-align: center;'>Crypto AI Agent</h1>",
-    unsafe_allow_html=True,
-)
 
+def meme_trending_page():
+    st.markdown("# Trending Meme Analysis")
+    col1, col2 = st.columns(2)
+    with col1:
+        chain = st.selectbox("Chain", options=["sol", "eth", "base", "bsc"], index=0)
 
-def display_instructions():
-    instructions_html = """
-    <style>
-        .orbitron-font {
-            font-family: 'Orbitron', sans-serif;
-        }
-    </style>
-    <h2 style='font-family: Orbitron, sans-serif;'>Instructions</h2>
-    <div class="orbitron-font">
-        <ul>
-            <li><strong>Enter the trading symbol</strong> (e.g., BTC, ETH, SOL, etc.).</li>
-            <li>The AI Agent will <strong>automatically analyze</strong> the market status across multiple timeframes.</li>
-            <li>Provide <strong>professional trend analysis</strong> and predictions.</li>
-            <li>Analyze <strong>overall market sentiment</strong>.</li>
-            <li>Provide <strong>detailed trading plans</strong>.</li>
-            <li>Generate a tweet.</li>
-        </ul>
-    </div>
-    """
-    st.markdown(instructions_html, unsafe_allow_html=True)
+    with col2:
+        timeframe = st.selectbox(
+            "Timeframe", options=["1m", "5m", "1h", "6h", "24h"], index=1
+        )
 
-
-def solana_meme_page():
-    st.title("Solana Meme Analysis")
+    gmgn_client = GMGNAPI(chain, timeframe)
     analyze_button = st.button("Start", type="primary")
-    if analyze_button:
-        data = GMGNAPI.get_data()
 
-        with st.spinner(f"Analysing Solana Meme Tokens..."):
-            meme_report = crypto_ai.generate_solana_meme(data)
-            st.markdown(meme_report)
-            # Add timestamp
+    if analyze_button:
+        data = gmgn_client.get_data()
+
+        with st.spinner(f"Analysing Trending Tokens on {chain.upper()}..."):
+            meme_report = crypto_ai.generate_meme_report(data, chain, timeframe)
+            st.write(meme_report, unsafe_allow_html=True)
             st.caption(f"Analysis time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
 
 def binance_market_analysis():
-    # Page Title & Description
-    st.markdown(
-        "<h2 style='font-family: Orbitron, sans-serif; text-align: center;'>Binance Market Analysis</h2>",
-        unsafe_allow_html=True,
-    )
-    display_instructions()
-    col1, col2 = st.columns([2, 1])
+    st.markdown("# Binance Market Analysis")
+    instructions_md = """
+        ### Instructions
 
+        - **Enter a symbol** (e.g., BTC, ETH, SOL, etc.).
+        - Crypto AI Agent will **automatically analyse** the market status across multiple timeframes:
+            1. Provide **trend analysis** and **market sentiment**.
+            2. Provide **detailed trading plans**.
+            3. Generate tweets with different styles.
+    """
+    st.markdown(instructions_md)
+
+    col1, col2 = st.columns([2, 1])
     with col1:
         symbol = st.text_input(
             "Enter a Symbol (e.g., BTC, ETH, SOL)", value="BTC"
@@ -195,7 +82,6 @@ def binance_market_analysis():
         if BinanceAPI.check_symbol_exists(symbol):
             with st.spinner(f"Analysing market status of {symbol}..."):
                 all_timeframe_analysis = {}
-
                 # Get data and analyse for each timeframe
                 timeframes = {
                     "5m": {"interval": "5m", "name": "5 minutes"},
@@ -204,22 +90,20 @@ def binance_market_analysis():
                     "4h": {"interval": "4h", "name": "4 hours"},
                     "1d": {"interval": "1d", "name": "daily"},
                 }
-
                 for tf, info in timeframes.items():
                     df = BinanceAPI.get_klines_data(symbol, info["interval"])
                     if df is not None:
                         df = TechnicalIndicators.calculate_indicators(df)
                         analysis = TechnicalIndicators.analyze_trend(df)
                         all_timeframe_analysis[info["name"]] = analysis
-
                 # Display current price
                 current_price = all_timeframe_analysis["daily"]["current_price"]
                 st.metric(
-                    label=f"{symbol}/USDT Current Price",
+                    label=f"Current Price: {symbol}/USDT",
                     value=(
                         f"${current_price:,.8f}"
                         if current_price < 0.1
-                        else f"${current_price:,.2f}"
+                        else f"${current_price:,.3f}"
                     ),
                 )
 
@@ -231,13 +115,13 @@ def binance_market_analysis():
                 analysis = crypto_ai.get_ai_analysis(
                     symbol, all_timeframe_analysis, trading_plan
                 )
-                st.markdown(analysis)
+                st.write(analysis, unsafe_allow_html=True)
 
                 # Add market sentiment
                 market_sentiment = BinanceAPI.get_market_sentiment()
                 st.markdown("---")
-                st.subheader("Overall Market Sentiment")
-                st.write(market_sentiment)
+                st.subheader("Market Sentiment")
+                st.markdown(market_sentiment)
 
                 # Generate tweets
                 st.markdown("---")
@@ -255,7 +139,7 @@ def binance_market_analysis():
                 for i, (style_name, style) in enumerate(styles.items()):
                     tweet = crypto_ai.generate_tweet(symbol, analysis_summary, style)
                     # Display the first two styles in the left column
-                    if i < 2:
+                    if i < 1:
                         with col1:
                             st.subheader(f"📝 {style_name}")
                             st.text_area(
@@ -287,26 +171,26 @@ def binance_market_analysis():
 
 def main():
     with st.sidebar:
-        st.subheader("Pages")
+        st.subheader("Tools")
         page = st.selectbox(
-            "Select a page:", ["Binance Market Analysis", "Solana Meme"]
+            "Select a tool:", ["Binance Market Analysis", "Trending Meme"]
         )
 
         st.markdown("---")
         st.subheader("Notes")
         st.write(
-            "Please ensure your analysis is for reference only and does not constitute investment advice. The cryptocurrency market is highly risky, please make decisions cautiously."
+            "Please ensure your analysis is for reference only and does not constitute investment advice. The crypto market is highly risky, please make decisions cautiously."
         )
 
     if page == "Binance Market Analysis":
         binance_market_analysis()
-    elif page == "Solana Meme":
-        solana_meme_page()
+    elif page == "Trending Meme":
+        meme_trending_page()
 
     # Add footer
     st.markdown("---")
     st.caption(
-        "Disclaimer: This analysis is for reference only and does not constitute investment advice. The cryptocurrency market is highly risky, please make decisions cautiously."
+        "Disclaimer: This analysis is for reference only and does not constitute investment advice. The crypto market is highly risky, please make decisions cautiously."
     )
 
 
